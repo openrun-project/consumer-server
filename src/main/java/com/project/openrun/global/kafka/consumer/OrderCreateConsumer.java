@@ -1,7 +1,7 @@
 package com.project.openrun.global.kafka.consumer;
 
 
-import com.project.openrun.global.kafka.producer.dto.OrderEventDto;
+import com.project.openrun.global.kafka.dto.OrderEventDto;
 import com.project.openrun.member.entity.Member;
 import com.project.openrun.orders.entity.Order;
 import com.project.openrun.orders.repository.OrderRepository;
@@ -16,7 +16,7 @@ public class OrderCreateConsumer {
 
     private final OrderRepository orderRepository;
 
-    @KafkaListener(topics = "test"/*, groupId = "${kafka.group-id}"*//*, containerFactory = "kafkaListenerContainerFactory"*/)
+    @KafkaListener(topics = "test")
     public void consumerOrderCreate(OrderEventDto orderEventDto) {
 
         Product product = orderEventDto.getProduct();
@@ -31,7 +31,6 @@ public class OrderCreateConsumer {
                 .build();
 
         orderRepository.save(order);
-//        throw new IllegalArgumentException();
     }
 }
 

@@ -5,8 +5,6 @@ import com.project.openrun.product.entity.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 import static jakarta.persistence.FetchType.*;
 
 @Entity

@@ -1,6 +1,6 @@
 package com.project.openrun.product.entity;
 
-import com.project.openrun.global.entity.BaseAuditing;
+import com.project.openrun.global.kafka.entity.BaseAuditing;
 import jakarta.persistence.*;
 import lombok.*;
 
