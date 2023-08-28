@@ -47,8 +47,8 @@ jobs:
           sudo usermod -aG docker $USER
           newgrp docker
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/open-run-consumer .
-          docker push ${{ secrets.DOCKER_REPO }}/open-run-consumer
+          docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/open-run-consumer:kimango .
+          docker push ${{ secrets.DOCKER_REPO }}/open-run-consumer:kimango
 
     - name: Deploy
       uses: appleboy/ssh-action@master
@@ -59,6 +59,6 @@ jobs:
         port: 22
         script: |
           sudo docker rm -f $(docker ps -qa)
-          sudo docker pull ${{ secrets.DOCKER_REPO }}/open-run-consumer
+          sudo docker pull ${{ secrets.DOCKER_REPO }}/open-run-consumer:kimango
           docker-compose -f /home/ubuntu/docker-compose.yml up -d
           docker image prune -f
