@@ -1,6 +1,6 @@
 package com.project.openrun.orders.entity;
 
-import com.project.openrun.global.entity.BaseAuditing;
+import com.project.openrun.global.kafka.entity.BaseAuditing;
 import com.project.openrun.member.entity.Member;
 import com.project.openrun.product.entity.Product;
 import jakarta.persistence.*;

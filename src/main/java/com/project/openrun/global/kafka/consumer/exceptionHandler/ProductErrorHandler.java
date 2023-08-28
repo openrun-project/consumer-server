@@ -1,6 +1,6 @@
 package com.project.openrun.global.kafka.consumer.exceptionHandler;
 
-import com.project.openrun.global.kafka.producer.dto.OrderEventDto;
+import com.project.openrun.global.kafka.dto.OrderEventDto;
 import com.project.openrun.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
