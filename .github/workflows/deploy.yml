@@ -46,9 +46,9 @@ jobs:
       run: |
           sudo usermod -aG docker $USER
           newgrp docker
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/open-run-consumer:kimango .
-          docker push ${{ secrets.DOCKER_REPO }}/open-run-consumer:kimango
+          sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          sudo docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/open-run-consumer:kimango .
+          sudo docker push ${{ secrets.DOCKER_REPO }}/open-run-consumer:kimango
 
     - name: Deploy
       uses: appleboy/ssh-action@master
