@@ -32,7 +32,7 @@ jobs:
     - run: touch ./src/main/resources/application.yml
     - run: echo "${{ secrets.APPLICATION_YML }}" > ./src/main/resources/application.yml
     # docker-compose.yml 만들기
-    - run: touch /home/ubuntu/docker-compose.yml
+    - run: touch ../docker-compose.yml
     - run: echo "${{ secrets.DOCKER_COMPOSE_YML }}" > ../docker-compose.yml
 
     - name: Make gradlew executable
