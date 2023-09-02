@@ -2,10 +2,7 @@ package com.project.openrun.global.kafka.consumer;
 
 
 import com.project.openrun.global.kafka.dto.OrderEventDto;
-import com.project.openrun.member.entity.Member;
-import com.project.openrun.orders.entity.Order;
-import com.project.openrun.orders.repository.OrderRepository;
-import com.project.openrun.product.entity.Product;
+import com.project.openrun.orders.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -13,24 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class OrderCreateConsumer {
-
-    private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
     @KafkaListener(topics = "test")
-    public void consumerOrderCreate(OrderEventDto orderEventDto) {
-
-        Product product = orderEventDto.getProduct();
-        Member member = orderEventDto.getMember();
-        Integer count = orderEventDto.getOrderRequestDto().count();
-
-        Order order = Order.builder()
-                .member(member)
-                .product(product)
-                .count(count)
-                .totalPrice(product.getPrice() * count)
-                .build();
-
-        orderRepository.save(order);
+    public void createOrderInConsumer(OrderEventDto orderEventDto) {
+        orderService.saveOrder(orderEventDto.getProductId(), orderEventDto.getMember(), orderEventDto.getOrderRequestDto().count());
     }
 }
 

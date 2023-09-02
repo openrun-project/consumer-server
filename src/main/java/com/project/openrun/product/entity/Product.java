@@ -40,18 +40,8 @@ public class Product extends BaseAuditing {
     @Enumerated(EnumType.STRING)
     private OpenRunStatus status;
 
-
-
-    public void addWish() {
-        this.wishCount += 1;
+    public void updateCurrentQuantity(Integer count){
+        this.currentQuantity = count;
     }
 
-    public void deleteWish() {
-        this.wishCount -= 1;
-    }
-
-
-    public void decreaseProductQuantity(Integer count) {
-        this.currentQuantity -= count;
-    }
 }
