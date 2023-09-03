@@ -38,12 +38,7 @@ public class KafkaConsumerConfig {
     @Value("${kafka.group-id}")
     private String groupId;
 
-    @Value("${kafka.concurrency-count}")
-    private int concurrencyCount;
-
-    @Value("${kafka.poll-timeout}")
-    private long pollTimeout;
-
+    //default
     @Value("${kafka.max-poll-records}")
     private int maxPollRecords;
 
@@ -76,7 +71,6 @@ public class KafkaConsumerConfig {
         props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, OrderEventDto.class.getName());
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, maxPollRecords);
-        props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, (int) pollTimeout);
 
         props.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, LongDeserializer.class);
         props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
