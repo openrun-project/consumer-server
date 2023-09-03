@@ -19,7 +19,7 @@ public class ProductErrorHandler implements CustomErrorHandler {
     @Override
     public void handle(ConsumerRecord<?, ?> consumerRecord, Exception exception) {
         OrderEventDto orderEventDto = (OrderEventDto) consumerRecord.value();
-        log.info("Listner에서 주문 저장에 실패했습니다. n번 실패");
+        log.info("Listner에서 주문 저장에 실패했습니다. 3번 실패");
         //redis에서만 올려준 것
         openRunProductRedisRepository.increaseQuantity(orderEventDto.getProductId(), orderEventDto.getOrderRequestDto().count());
 
