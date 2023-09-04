@@ -1,6 +1,7 @@
 package com.project.openrun.global.kafka.consumer.exceptionHandler;
 
 import com.project.openrun.global.kafka.dto.OrderEventDto;
+import com.project.openrun.orders.service.OrderService;
 import com.project.openrun.product.repository.OpenRunProductRedisRepository;
 import com.project.openrun.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ public class ProductErrorHandler implements CustomErrorHandler {
 
     private final ProductRepository productRepository;
     private final OpenRunProductRedisRepository openRunProductRedisRepository;
+    private final OrderService orderService;
 
     @Override
     public void handle(ConsumerRecord<?, ?> consumerRecord, Exception exception) {
@@ -25,6 +27,8 @@ public class ProductErrorHandler implements CustomErrorHandler {
 
         //DB에서만 올려준 것
         productRepository.updateProductQuantity(orderEventDto.getOrderRequestDto().count(), orderEventDto.getProductId());
+
+        orderService.saveFailOrder(orderEventDto.getProductId(),orderEventDto.getMember(),orderEventDto.getOrderRequestDto().count());
 
     }
 }
