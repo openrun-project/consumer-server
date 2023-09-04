@@ -22,6 +22,9 @@ public class Order extends BaseAuditing {
     @Column(name = "orders_id")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
