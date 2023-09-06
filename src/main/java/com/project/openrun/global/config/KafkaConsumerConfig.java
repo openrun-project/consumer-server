@@ -42,13 +42,16 @@ public class KafkaConsumerConfig {
     @Value("${kafka.max-poll-records}")
     private int maxPollRecords;
 
+    @Value("${kafka.topic.notification}")
+    private String topic;
+
     /*나중에 지울게요 => 여기 빈으로 주입 받고 => 아래서 productErrorHandler.handle() or productErrorHandler::handle 을 통해서 구현체에서 작동*/
     private final CustomErrorHandler productErrorHandler;
     private final OrderCreateConsumer orderCreateConsumer;
 
     @Bean
     public KafkaMessageListenerContainer<Long, OrderEventDto> kafkaMessageListenerContainer() {
-        ContainerProperties properties = new ContainerProperties("test");
+        ContainerProperties properties = new ContainerProperties(topic);
         properties.setMessageListener((MessageListener<Long, OrderEventDto>) data -> {
             orderCreateConsumer.createOrderInConsumer(data.value());
         });
